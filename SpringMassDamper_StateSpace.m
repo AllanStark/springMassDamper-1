@@ -107,7 +107,7 @@ subplot(2, 2, 3); % new figure
     
 display(toc, 'Plotting Manual Spring-Mass-Damper System'); % for timing
 %% Manual Discretization of State Space
-
+tic
 G = expm((A * Ts)); % discretized A
 H = (A')*(G - eye(2))*(B); % discretized B
 J = C; % discretized C
@@ -126,8 +126,9 @@ for i = 1:nSmp % loops nSmp times, setting i to current cycle #
     x_dis_plot(:,i) = x_dis; % for plotting X later
     
 end % terminate for loop
+display(toc, 'Manual Discretization of State Space');
 %% Plotting Manual Discretization of State Space
-
+tic
 subplot(2, 2, 4);
     fig4 = plot(t, x_dis_plot(1,:), 'b', t, x_dis_plot(2, :), 'r'); % plots position in blue and velocity in red (y axis) with time on x axis
     leg = legend('Displacement', 'Velocity'); set(leg, 'FontSize', 10.125); % legend - posiiton is blue and velocity is red
