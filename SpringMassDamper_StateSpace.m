@@ -26,9 +26,9 @@ tic % for timing
 
 duration = 250; % duration of for loop
 
-Ts = 1/5; % timestep
+Ts = 1/5; % timestep,  must be less than 1
 
-t = 0:Ts:duration; % time vector
+t = 0 : Ts : duration; % time array
 
 nSmp = length(t); % number of samples
 
@@ -113,9 +113,9 @@ H = (A')*(G - eye(2))*(B); % discretized B
 J = C; % discretized C
 K = D; % discretized D
 
-x_dis = [0;0];
+x_dis = [0;0]; %initial states
 y_dis = zeros(1, nSmp); % preallocation for speed
-x_dis_plot = zeros(2, nSmp);
+x_dis_plot = zeros(2, nSmp); % preallocation for speed
 
 for i = 1:nSmp % loops nSmp times, setting i to current cycle #
     
@@ -131,9 +131,14 @@ display(toc, 'Manual Discretization of State Space');
 tic
 subplot(2, 2, 4);
     fig4 = plot(t, x_dis_plot(1,:), 'b', t, x_dis_plot(2, :), 'r'); % plots position in blue and velocity in red (y axis) with time on x axis
-    leg = legend('Displacement', 'Velocity'); set(leg, 'FontSize', 10.125); % legend - posiiton is blue and velocity is red
+    leg = legend('Displacement', 'Velocity'); 
+    set(leg, 'FontSize', 10.125); % legend - posiiton is blue and velocity is red
     title('Manual For Loop - Manual Discretization'); % figure title
-    set(fig4, 'LineWidth', 1.5); set(gca, 'FontName', 'Times New Roman'); set(gca, 'TitleFontSizeMultiplier', 1.25); set(gca, 'FontSize', 10); set(gca, 'LabelFontSizeMultiplier', 1.125); % figure styling
+    set(fig4, 'LineWidth', 1.5); 
+    set(gca, 'FontName', 'Times New Roman'); 
+    set(gca, 'TitleFontSizeMultiplier', 1.25); 
+    set(gca, 'FontSize', 10); 
+    set(gca, 'LabelFontSizeMultiplier', 1.125); % figure styling
     ylabel('Displacement (m) and Velocity (m/s)'); % y axis label
     xlabel('Time (s)'); % x axis label
     
